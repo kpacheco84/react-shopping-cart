@@ -124,8 +124,9 @@ footer {
   cursor: pointer;
 }
 
-.button:hover {
+.button-primary:hover {
   border: 0.1rem #808080 solid;
+  background-color: lightgoldenrodyellow;
 }
 
 .button-primary {
