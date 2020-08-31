@@ -13,25 +13,20 @@ class Products extends Component {
       product: null,
     };
   }
-
   componentDidMount() {
     this.props.fetchProducts();
   }
-
   openModal = (product) => {
     this.setState({ product });
   };
-
   closeModal = () => {
     this.setState({ product: null });
   };
-
   render() {
     const { product } = this.state;
-
     return (
       <div>
-        <Fade bottom cascade={true}>
+        <Fade bottom cascade>
           {!this.props.products ? (
             <div>Loading...</div>
           ) : (
@@ -50,7 +45,7 @@ class Products extends Component {
                       <div>{formatCurrency(product.price)}</div>
                       <button
                         onClick={() => this.props.addToCart(product)}
-                        className="button-primary"
+                        className="button primary"
                       >
                         Add To Cart
                       </button>
@@ -62,10 +57,10 @@ class Products extends Component {
           )}
         </Fade>
         {product && (
-          <Modal isOpen={true} onRequest={this.closeModal}>
+          <Modal isOpen={true} onRequestClose={this.closeModal}>
             <Zoom>
               <button className="close-modal" onClick={this.closeModal}>
-                X
+                x
               </button>
               <div className="product-details">
                 <img src={product.image} alt={product.title}></img>
@@ -75,7 +70,7 @@ class Products extends Component {
                   </p>
                   <p>{product.description}</p>
                   <p>
-                    Available Sizes:{" "}
+                    Avaiable Sizes:{" "}
                     {product.availableSizes.map((x) => (
                       <span>
                         {" "}
@@ -86,7 +81,7 @@ class Products extends Component {
                   <div className="product-price">
                     <div>{formatCurrency(product.price)}</div>
                     <button
-                      className="button button-primary"
+                      className="button primary"
                       onClick={() => {
                         this.props.addToCart(product);
                         this.closeModal();
@@ -104,7 +99,9 @@ class Products extends Component {
     );
   }
 }
-
-export default connect((state) => ({ products: state.products.items }), {
-  fetchProducts,
-})(Products);
+export default connect(
+  (state) => ({ products: state.products.filteredItems }),
+  {
+    fetchProducts,
+  }
+)(Products);
