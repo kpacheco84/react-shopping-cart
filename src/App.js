@@ -3,23 +3,24 @@ import React from "react";
 //import data from "./data.json"; now comes from backend
 import Products from "./components/Products";
 import Filter from "./components/Filter";
-import Cart from "./Cart";
+import Cart from "./components/Cart";
 import store from "./store";
 import { Provider } from "react-redux";
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      //comes from redux products: data.products,
-      //  comes from redux store size: "",
-      //comes from redux store sort: "",
-      cartItems: JSON.parse(localStorage.getItem("cartItems"))
+  // constructor() {
+  // super();
+  ///this.state = {
+  //comes from redux products: data.products,
+  //  comes from redux store size: "",
+  //comes from redux store sort: "",
+  /*cartItems: JSON.parse(localStorage.getItem("cartItems"))
         ? JSON.parse(localStorage.getItem("cartItems"))
-        : [],
-    };
-  }
+        : [],*/
+  //  };
+  // }
 
+  /* no longer needed this is provided by redux store
   createOrder = (order) => {
     alert("Need to save order for " + order.name);
   };
@@ -53,7 +54,7 @@ class App extends React.Component {
     this.setState({ cartItems });
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
-
+*/
   /* no longer needing these parameters in FILTER component , this will come from redux store
                  count={this.state.products.length}
                   size={this.state.size}
@@ -62,6 +63,11 @@ class App extends React.Component {
                   sortProducts={this.sortProducts}
                 */
   /* no longer needing these parameters in Products component coming from redux store products={this.state.products}*/
+  /*no longer needed in Cart component cartItems={this.state.cartItems}
+                  removeFromCart={this.removeFromCart}
+                  createOrder={this.createOrder}*/
+  /* no longer needed in Products component addToCart={this.addToCart}*/
+
   /* this has moved to product actions
   sortProducts = (event) => {
     //impl
@@ -111,14 +117,10 @@ class App extends React.Component {
             <div className="content">
               <div className="main">
                 <Filter></Filter>
-                <Products addToCart={this.addToCart}> </Products>
+                <Products> </Products>
               </div>
               <div className="sidebar">
-                <Cart
-                  cartItems={this.state.cartItems}
-                  removeFromCart={this.removeFromCart}
-                  createOrder={this.createOrder}
-                />
+                <Cart />
               </div>
             </div>
           </main>
