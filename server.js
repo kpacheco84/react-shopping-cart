@@ -2,13 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
-const { Provider } = require("react-redux");
+//const { Provider } = require("react-redux");
 
 const app = express();
 app.use(bodyParser.json());
 
-app.use("/", express.static(_dirname + "/build"));
-app.get("/", (req, res) => res.sendFile(_dirname + "/build/index.html"));
+app.use("/", express.static(__dirname + "/build"));
+app.get("/", (req, res) => res.sendFile(__dirname + "/build/index.html"));
 
 mongoose.connect(
   process.env.MONGODB_URL || "mongodb://localhost/react-shopping-cart-db",
@@ -18,7 +18,6 @@ mongoose.connect(
     useUnifiedTopology: true,
   }
 );
-
 const Product = mongoose.model(
   "products",
   new mongoose.Schema({
